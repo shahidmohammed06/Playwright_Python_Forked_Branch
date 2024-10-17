@@ -31,3 +31,4 @@ virtualenv==20.25.0
 virtualenv-clone==0.5.7
 virtualenvwrapper==6.1.0
 python-dotenv==1.0.1
+pytest-rerunfailures==14.0
