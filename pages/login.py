@@ -2,6 +2,8 @@ import os
 
 from playwright.sync_api import Page
 
+from utils.logger import logger
+
 
 class LoginPage:
 
@@ -13,6 +15,7 @@ class LoginPage:
         self.login_logo = page.locator('.login_logo')
 
     def navigate(self):
+        logger.info(f"navigating to {os.getenv('BASE_URL')}")
         self.page.goto(os.getenv("BASE_URL"))
 
     def login(self, username: str, password: str):
