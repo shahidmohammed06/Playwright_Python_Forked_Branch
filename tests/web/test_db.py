@@ -4,13 +4,16 @@ import pytest
 from playwright.sync_api import Page
 
 from db.connection import connect_to_db
+from utils.logger import logger
 
 
 @pytest.fixture(scope='function')
 def db_connection():
     connection = connect_to_db()
+    logger.info('db connection has been established.')
     yield connection
     connection.close()
+    logger.info('db connection has been closed.')
 
 
 @allure.title("DB Validation Test")

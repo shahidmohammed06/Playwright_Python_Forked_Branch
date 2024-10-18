@@ -19,3 +19,6 @@ allure-report/
 
 # Ignore playwright screenshots and video folder
 test-results
+
+# Ignore logs
+logs
