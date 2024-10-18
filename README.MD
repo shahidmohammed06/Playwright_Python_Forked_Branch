@@ -31,6 +31,10 @@ Before getting started, make sure you have the following prerequisites installed
     pip install virtualenv
 ```
 
+## for password encryption
+```shell
+    pip install cryptography
+```
 
 ## Getting Started
 
@@ -60,17 +64,17 @@ pip3 install -r requirements.txt
 1. Running UI tests in headless mode Chrome
 
 ```shell
-python3 -m pytest -m webtest tests --verbose
+python -m pytest -m webtest tests --verbose
 ```
 2. Running UI tests in headed mode & specific browser(chromium,firefox,webkit)
 
 ```shell
-pytest -m webtest tests --browser webkit  --headed --verbose
+python3 -m pytest -m webtest tests --browser webkit  --headed --verbose
 ```
 3. Running UI tests in headed mode in all browsers in parallel
 
 ```shell
-pytest -m webtest tests --numprocesses auto --browser chromium --browser firefox --browser webkit  --headed --verbose
+python3 -m pytest -m webtest tests --numprocesses auto --browser chromium --browser firefox --browser webkit  --headed --verbose
 ```
 
 ## Running API Tests
@@ -78,26 +82,26 @@ pytest -m webtest tests --numprocesses auto --browser chromium --browser firefox
 Running API tests using Playwright
 
 ```shell
-pytest -m apitest -s tests --screenshot on --verbose
+python3 -m pytest -m apitest -s tests --screenshot on --verbose
 ```
 ## Running All Tests
 
 1. Running All tests using Playwright in headless mode
 
 ```shell
-pytest -s tests --screenshot on --verbose
+python3 -m pytest -s tests --screenshot on --verbose
 ```
 
 1. Running All tests using Playwright in headed mode
 ```shell
-pytest -s tests --screenshot on --verbose --headed
+python3 -m pytest -s tests --screenshot on --verbose --headed
 ```
 ## Running Tests Against Different Environments
 
 1. Running tests against different environments like qa, stage or prod
 
 ```shell
-pytest -s tests --env stage --verbose
+python3 -m pytest -s tests --env stage --verbose
 ```
 
 ## Debugging Tests
@@ -105,7 +109,7 @@ pytest -s tests --env stage --verbose
 In order to launch Playwright inspector and debug specific tests run following commands
 
 ```shell
-PWDEBUG=1 pytest -s -k test_login --verbose
+PWDEBUG=1 python3 -m pytest -s -k test_login --verbose
 ```
 
 ## Allure Report
@@ -114,7 +118,7 @@ By default test summary will be posted into commandline
 In order to generate HTML report using Allure reporting framework run tests with `--alluredir` parameter
 
 ```shell
-pytest -s --alluredir=allure-results tests --numprocesses auto --browser chromium --browser firefox --browser webkit --screenshot on --video on --headed --verbose
+python3 -m pytest -s --alluredir=allure-results tests --numprocesses auto --browser chromium --browser firefox --browser webkit --screenshot on --video on --headed --verbose
 ```
 
 And the generate and open report in browser by running

@@ -4,6 +4,7 @@ from pages.cart import CartPage
 from pages.checkout_step import CheckoutStepPage
 from pages.inventory import InventoryPage
 from pages.login import LoginPage
+from pages.demoBlazeLogin import DemoBlazeLoginPage
 
 
 class PageManager:
@@ -14,4 +15,5 @@ class PageManager:
         self.inventory_page = InventoryPage(page)
         self.cart_page = CartPage(page)
         self.checkout_step_page = CheckoutStepPage(page)
+        self.demoBlazeLoginPage = DemoBlazeLoginPage(page)
 
