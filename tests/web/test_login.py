@@ -29,7 +29,7 @@ def test_login_users(data, page: Page, pm: PageManager) -> None:
     expect(pm.login_page.login_logo).to_have_text('Swag Labs')
 
     # Perform login with valid credentials
-    logger.info(f"login with username {data["username"]}")
+    logger.info(f"login with username {data['username']}")
     pm.login_page.login(data["username"], data["password"])
 
     # Attach a screenshot after login
