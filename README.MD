@@ -55,6 +55,11 @@ venv\Scripts\activate.bat
 pip3 install -r requirements.txt
 ```
 
+5. Install en_core_web_sm in spacy lib
+```shell
+python -m spacy download en_core_web_sm
+```
+
 ## Running UI Tests
 
 1. Running UI tests in headless mode Chrome
