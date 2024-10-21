@@ -110,7 +110,8 @@ def pytest_terminal_summary(terminalreporter):
         ws.column_dimensions[column].width = adjusted_width
 
     # Save the workbook after all tests
-    wb.save(report_file)
+    if os.getenv('CI'):
 
-    # Print the location of the test results file
-    print(f"\nTest results have been written to {report_file}\n")
+        wb.save(report_file)
+        # Print the location of the test results file
+        print(f"\nTest results have been written to {report_file}\n")
