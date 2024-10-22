@@ -34,7 +34,7 @@ def rift_ai(rift_command: str, page: Page):
         elif ent.label_ == "TYPE":
             type_ = ent.text
 
-    open_commands = ["open", "navigate", "launch", "go to"]
+    open_commands = ["open", "navigate to", "launch", "go to"]
     type_commands = ["type", "enter", "fill"]
     click_commands = ["clicks", "click"]
 
@@ -43,5 +43,5 @@ def rift_ai(rift_command: str, page: Page):
     elif command in type_commands:
         return find_locator(page, 'input', field).fill(value)
     elif command in click_commands:
-        return find_locator(page, 'input', value).click()
+        return find_locator(page, type_, value).click()
 

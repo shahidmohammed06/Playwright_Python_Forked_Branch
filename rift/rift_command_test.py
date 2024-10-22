@@ -4,7 +4,7 @@ import spacy
 nlp_custom = spacy.load("rift_model")
 
 # Test the custom NER model on a new sentence
-doc = nlp_custom("Click on the Login button")
+doc = nlp_custom("Enter 'secret_sauce' into Password input field" )
 
 # Initialize variables to hold the extracted entities
 command = None
@@ -24,7 +24,7 @@ for ent in doc.ents:
         type_ = ent.text
 
 # Print the extracted entities
-print(f"Command {command}")
-print(f"{value} VALUE")
-print(f"{field} FIELD")
-print(f"{type_} TYPE")
+print(f"COMMAND - {command}")
+print(f"VALUE - {value}")
+print(f"FIELD - {field}")
+print(f"TYPE - {type_}")

@@ -18,7 +18,7 @@ def test_login_users(page: Page, pm: PageManager) -> None:
     rift_ai('Navigate to https://www.saucedemo.com', page)
     rift_ai("Enter 'standard_user' into Username input", page)
     rift_ai("Enter 'secret_sauce' into Password input", page)
-    rift_ai("Click on the Login button", page)
+    rift_ai("Click on the login input", page)
 
     # Verify that the user is navigated to the inventory page
     expect(page).to_have_url(f"{os.getenv('BASE_URL')}/inventory.html")
