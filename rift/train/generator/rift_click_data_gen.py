@@ -4,14 +4,13 @@ import random
 commands = ['click', 'clicks']
 values = ['login', 'submit', 'register', 'continue', 'proceed', 'enter', 'confirm', 'apply', 'login-lnk', 'lgn-btn',
           'login_lnk', 'lgn_btn']
-types = ['button', 'link', 'input']
+types = ['button', 'link', 'input', 'label']
 
 # Generate training data
 TRAIN_DATA = []
 
 
 def get_click_training_data(max_training_data_limit: int):
-
     for _ in range(max_training_data_limit):
         command = random.choice(commands)
         value = random.choice(values)
@@ -43,5 +42,3 @@ def get_click_training_data(max_training_data_limit: int):
                 ]}))
 
     return TRAIN_DATA
-
-print(get_click_training_data(100))

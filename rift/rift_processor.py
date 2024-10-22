@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import spacy
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 
 from rift.locator import find_locator
 from utils.getProjectRoot import find_project_root
@@ -37,6 +37,7 @@ def rift_ai(rift_command: str, page: Page):
     open_commands = ["open", "navigate to", "launch", "go to"]
     type_commands = ["type", "enter", "fill"]
     click_commands = ["clicks", "click"]
+    verify_commands = ['verify', 'assert', 'validate']
 
     if command in open_commands:
         return page.goto(value)
@@ -44,4 +45,9 @@ def rift_ai(rift_command: str, page: Page):
         return find_locator(page, 'input', field).fill(value)
     elif command in click_commands:
         return find_locator(page, type_, value).click()
+    elif command in verify_commands:
+       if 'page title' in rift_command.lower():
+           expect(page).to_have_title(value)
+       elif 'url contains' in rift_command.lower():
+           expect(page).to_have_url(value)
 

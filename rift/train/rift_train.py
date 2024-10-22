@@ -7,15 +7,17 @@ from spacy.training import Example
 from rift.train.generator.rift_click_data_gen import get_click_training_data
 from rift.train.generator.rift_open_data_gen import get_open_training_data
 from rift.train.generator.rift_type_data_gen import get_type_training_data
+from rift.train.generator.rift_verify_data_gen import get_verify_training_data
 
 # Increase the amount of training data
 TRAIN_DATA = []
 
-max_training_data_limit = 500
+max_training_data_limit = 100
 
 TRAIN_DATA.extend(get_type_training_data(max_training_data_limit))
 TRAIN_DATA.extend(get_click_training_data(max_training_data_limit))
 TRAIN_DATA.extend(get_open_training_data(max_training_data_limit))
+TRAIN_DATA.extend(get_verify_training_data(max_training_data_limit))
 
 
 # Load a blank English model
@@ -37,7 +39,7 @@ ner.add_label("TYPE")
 optimizer = nlp.begin_training()
 
 # Train the NER model for a few iterations
-for i in range(10):
+for i in range(50):
     random.shuffle(TRAIN_DATA)
     losses = {}
     for text, annotations in TRAIN_DATA:

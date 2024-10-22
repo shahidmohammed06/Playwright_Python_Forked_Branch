@@ -20,9 +20,8 @@ def test_login_users(page: Page, pm: PageManager) -> None:
     rift_ai("Enter 'secret_sauce' into Password input", page)
     rift_ai("Click on the login input", page)
 
-    # Verify that the user is navigated to the inventory page
-    expect(page).to_have_url(f"{os.getenv('BASE_URL')}/inventory.html")
-
+    rift_ai(f"verify the page title is 'Swag Labs'", page)
+    rift_ai(f"verify the url contains '{os.getenv('BASE_URL')}/inventory.html'", page)
 
     png_bytes = page.screenshot()
     allure.attach(
