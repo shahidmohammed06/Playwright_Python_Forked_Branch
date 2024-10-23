@@ -1,8 +1,8 @@
 import random
 
 # Define possible replacements
-commands = ['open', 'launch', 'go to', 'navigate to']
-values = ['https://www.google.com', 'https://yahoo.com', 'https://gmail.com']
+commands = ['open', 'launch', 'go to', 'navigate to', 'visit', 'goto']
+values = ['https://www.google.com', 'https://yahoo.com', 'http://gmail.com']
 
 # Generate training data
 TRAIN_DATA = []

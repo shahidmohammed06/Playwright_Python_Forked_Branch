@@ -4,7 +4,7 @@ import spacy
 nlp_custom = spacy.load("rift_model")
 
 # Test the custom NER model on a new sentence
-doc = nlp_custom("verify the page title is 'Swag Labssfsf'" )
+doc = nlp_custom("verify the page title is 'Swag Labs'" )
 
 # Initialize variables to hold the extracted entities
 command = None

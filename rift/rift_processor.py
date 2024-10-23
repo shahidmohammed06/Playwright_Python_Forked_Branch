@@ -44,7 +44,7 @@ def rift_ai(rift_command: str, page: Page):
     elif command in type_commands:
         return find_locator(page, 'input', field).fill(value)
     elif command in click_commands:
-        return find_locator(page, type_, value).click()
+        return find_locator(page, type_, field, value).click()
     elif command in verify_commands:
        if 'page title' in rift_command.lower():
            expect(page).to_have_title(value)

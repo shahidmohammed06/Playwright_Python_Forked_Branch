@@ -15,13 +15,13 @@ from rift.rift_processor import rift_ai
 @pytest.mark.webtest
 def test_login_users(page: Page, pm: PageManager) -> None:
 
-    rift_ai('Navigate to https://www.saucedemo.com', page)
-    rift_ai("Enter 'standard_user' into Username input", page)
-    rift_ai("Enter 'secret_sauce' into Password input", page)
-    rift_ai("Click on the login input", page)
+    rift_ai('open https://www.saucedemo.com', page)
+    rift_ai("enter 'standard_user' into username input", page)
+    rift_ai("type 'secret_sauce' into password input", page)
+    rift_ai("click on the login input", page)
 
     rift_ai(f"verify the page title is 'Swag Labs'", page)
-    rift_ai(f"verify the url contains '{os.getenv('BASE_URL')}/inventory.html'", page)
+    rift_ai(f"assert the url contains '{os.getenv('BASE_URL')}/inventory.html'", page)
 
     png_bytes = page.screenshot()
     allure.attach(
