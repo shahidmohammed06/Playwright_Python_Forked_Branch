@@ -1,6 +1,7 @@
 import os
 import random
 import concurrent.futures
+import time  # Import time to track execution time
 
 import spacy
 from spacy.training import Example
@@ -13,7 +14,7 @@ from rift.train.generator.rift_verify_data_gen import get_verify_training_data
 # Increase the amount of training data
 TRAIN_DATA = []
 
-max_training_data_limit = 100
+max_training_data_limit = 50
 
 TRAIN_DATA.extend(get_type_training_data(max_training_data_limit))
 TRAIN_DATA.extend(get_click_training_data(max_training_data_limit))
@@ -38,30 +39,48 @@ ner.add_label("TYPE")
 # Prepare the training
 optimizer = nlp.begin_training()
 
-def train_on_chunk(chunk):
-    """Train the model on a chunk of training data."""
+
+def train_on_example(text, annotations):
     losses = {}
-    for text, annotations in chunk:
-        doc = nlp.make_doc(text)
-        example = Example.from_dict(doc, annotations)
-        nlp.update([example], losses=losses, drop=0.5)  # Update the model with the training data
+    doc = nlp.make_doc(text)
+    example = Example.from_dict(doc, annotations)
+    nlp.update([example], losses=losses, drop=0.5)  # Update the model with the training data
     return losses
 
-# Train the NER model for a few iterations
-for i in range(10):
-    random.shuffle(TRAIN_DATA)
-    # Split TRAIN_DATA into smaller chunks for threading
-    chunk_size = max(1, len(TRAIN_DATA) // os.cpu_count())
-    chunks = [TRAIN_DATA[j:j + chunk_size] for j in range(0, len(TRAIN_DATA), chunk_size)]
 
-    # Use ThreadPoolExecutor to train on chunks in parallel
-    with concurrent.futures.ThreadPoolExecutor() as executor:
-        futures = [executor.submit(train_on_chunk, chunk) for chunk in chunks]
+# Capture the start time for the entire training process
+overall_start_time = time.time()
+
+# Train the NER model for a few iterations
+for i in range(15):
+    iteration_start_time = time.time()  # Start time for each iteration
+
+    random.shuffle(TRAIN_DATA)
+    overall_losses = {"ner": 0.0}  # Accumulator for overall losses
+
+    # Use ThreadPoolExecutor to train on the entire dataset in parallel
+    with concurrent.futures.ThreadPoolExecutor(max_workers=os.cpu_count()) as executor:
+        futures = [executor.submit(train_on_example, text, annotations) for text, annotations in TRAIN_DATA]
+
         for future in concurrent.futures.as_completed(futures):
             losses = future.result()  # Retrieve the losses from each thread
-            print(f"Losses from a chunk: {losses}")
 
-    print(f"Iteration {i + 1} completed.")
+            # Accumulate the loss for the NER component
+            overall_losses["ner"] += losses.get("ner", 0.0)
+
+    # Calculate the time taken for this iteration
+    iteration_end_time = time.time()
+    iteration_duration = iteration_end_time - iteration_start_time
+
+    print(f"Iteration {i + 1} completed. Overall Loss: {overall_losses['ner']:.4f}. "
+          f"Iteration Time: {iteration_duration:.2f} seconds.")
+
+# Capture the end time for the entire training process
+overall_end_time = time.time()
+
+# Calculate total time taken for training
+total_duration = overall_end_time - overall_start_time
+print(f"Training completed. Total time taken: {total_duration:.2f} seconds.")
 
 # Save the trained model to disk
 nlp.to_disk(project_root)

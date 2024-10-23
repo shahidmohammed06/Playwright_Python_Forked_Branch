@@ -110,31 +110,42 @@ def soft_locator_match(tag: Tag, text: str):
 
 
 def get_locator_for_element(page: Page, element: Tag, text: str):
-    element_id = element.get('id', '')
-    element_name = element.get('name', '')
+    element_id = element.get('id', '').strip()
+    element_name = element.get('name', '').strip()
     element_class = ' '.join(element.get('class', [])).strip()
-    element_type_attr = element.get('type', '')
-    element_placeholder = element.get('placeholder', '')
+    element_placeholder = element.get('placeholder', '').strip()
     element_text = element.get_text().strip()
 
-    print(f"element_id is {element_id}")
-    print(f"element_name is {element_name}")
-    print(f"element_class is {element_class}")
-    print(f"element_placeholder is {element_placeholder}")
-
     # Return the correct locator based on which attribute matched the text
-    if text in element_id.lower():
+    if element_id:
         return page.locator(f"[id='{element_id}']")
-    elif text in element_name.lower():
+    elif element_name:
         return page.locator(f"[name='{element_name}']")
-    elif text in element_class.lower():
-        return page.locator(f".{element_class.replace(' ', '.')}")
-    elif text in element_type_attr.lower():
-        return page.locator(f"[type='{element_type_attr}']")
-    elif text in element_placeholder.lower():
+    elif element_placeholder:
         return page.get_by_placeholder(element_placeholder)
-    elif text in element_text.lower():
-        return page.get_by_text(element_text)
+    elif element_text.lower() == text.lower():
+        locator = page.get_by_text(text)
+        count = locator.count()
+        if count == 1:
+            return locator
+
+
+    # If none of the specified attributes are present, build a selector from all available attributes
+    attrs = element.attrs
+    selectors = []
+    for attr, value in attrs.items():
+        if isinstance(value, list):
+            value = ' '.join(value)  # Join class names or any list attribute
+        if value.strip():  # Check if the attribute value is not empty
+            selectors.append(f"[{attr}='{value.strip()}']")
+
+    # Join the selectors to form a combined locator
+    if selectors:
+        combined_selector = ''.join(selectors)
+        return page.locator(combined_selector)
+
+    # If no valid attribute or text is found, raise an error
+    raise ValueError("No valid attributes or text found to generate a selector.")
 
 
 class ElementNotFoundException(Exception):

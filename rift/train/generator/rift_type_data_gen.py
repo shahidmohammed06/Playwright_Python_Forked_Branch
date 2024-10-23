@@ -2,8 +2,8 @@ import random
 
 # Define possible replacements
 commands = ['type', 'enter', 'fill']
-values = ['hello', 'world', 'test', 'data', 'user123', 'input', 'example', 'code', 'key', 'pass']
-fields = ['search', 'username', 'firstname', 'email', 'password', 'PIN', 'first-name', 'first_name', 'user-name', 'user_name']
+values = ['hello', 'world123#', 'test', 'data', 'user123']
+fields = ['search', 'username', 'firstName', 'email', 'password', 'PIN', 'first-name', 'first_name', 'user-name', 'user_name']
 input_types = ['input', 'box', 'input field', 'text box', 'text field', 'input box']
 
 TRAIN_DATA = []
@@ -20,7 +20,7 @@ def get_type_training_data(max_training_data_limit: int):
         # Variations for search-related fields
         variations = [
             f"{command} '{value}' into the {field} {input_type}",
-            f"{command} '{value}' into {field.replace('input', '')} {input_type}",
+            f"{command} '{value}' into {input_type}",
         ]
 
         # Include variations with search input

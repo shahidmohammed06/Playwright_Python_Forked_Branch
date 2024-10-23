@@ -5,7 +5,7 @@ commands = ['click', 'clicks', 'select']
 fields = ['login', 'submit', 'register', 'continue', 'proceed', 'enter', 'confirm', 'apply', 'login-lnk', 'lgn-btn',
           'login_lnk', 'lgn_btn']
 values = ['male', 'female', 'other', 'abc-123', 'abc_123', 'abc-12#', 'abc_12#']
-types = ['button', 'link', 'input', 'label']
+types = ['button', 'link', 'input', 'label', 'radio button', 'checkbox']
 
 # Generate training data
 TRAIN_DATA = []

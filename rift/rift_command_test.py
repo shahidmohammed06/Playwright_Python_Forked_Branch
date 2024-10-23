@@ -1,10 +1,13 @@
 import spacy
+from faker import Faker
+
+faker = Faker()
 
 # Load the saved model
 nlp_custom = spacy.load("rift_model")
 
 # Test the custom NER model on a new sentence
-doc = nlp_custom("verify the page title is 'Swag Labs'" )
+doc = nlp_custom(f"Click on the Male label" )
 
 # Initialize variables to hold the extracted entities
 command = None
