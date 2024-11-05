@@ -17,6 +17,7 @@ class LoginPage:
     def navigate(self):
         logger.info(f"navigating to {os.getenv('BASE_URL')}")
         self.page.goto(os.getenv("BASE_URL"))
+        logger.info(f"navigated to {os.getenv('BASE_URL')}")
 
     def login(self, username: str, password: str):
         self.username_input.fill(username)
