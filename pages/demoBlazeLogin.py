@@ -20,7 +20,7 @@ class DemoBlazeLoginPage:
         logger.info("CLicked on login button")
         self.username_input.fill(username)
         logger.info("Entered userName")
-        self.username_input.fill(decrypted_password)
+        self.username_input.fill(password)
         logger.info("Entered password")
         self.login_button.click()
         logger.info("Clicked on login button")

@@ -32,7 +32,7 @@ test_data = [
 def test_demoBlazeLogin(data, page: Page, pm: PageManager) -> None:
     # Navigate to the login page
     pm.demoBlazeLoginPage.navigate()
-    logger.info("Navigating to site: "+os.envgetenv('DEMOBLAZE_URL'))
+    logger.info("Navigating to site: "+os.getenv('DEMOBLAZE_URL'))
 
     # Verify the title and logo text
     expect(page).to_have_title('STORE')
