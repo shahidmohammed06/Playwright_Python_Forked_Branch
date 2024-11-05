@@ -10,7 +10,7 @@ current_file_path = Path(__file__).resolve()
 project_root = find_project_root(current_file_path, 'requirements.txt')
 
 print("Project Root:", project_root)
-nlp_custom = spacy.load(f"{project_root}\\rift\\rift_model")
+nlp_custom = spacy.load(f"{project_root}/rift/rift_model")
 
 
 # Function to process the command and extract information
