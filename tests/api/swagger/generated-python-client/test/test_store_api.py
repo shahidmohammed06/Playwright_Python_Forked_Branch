@@ -73,10 +73,6 @@ class TestStoreApi(unittest.TestCase):
         json_response = response.model_dump_json()
         allure.attach(str(json_response), "Response Body")
         logger.info("Create User API Response:\n{}".format(json_response))
-     #   assert json_response["name"] == payload.get("name")
-       # order_ids.append(json_response["id"])
-
-        #pass
 
 
 if __name__ == '__main__':
