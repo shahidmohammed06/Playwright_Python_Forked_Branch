@@ -1,0 +1,32 @@
+trigger:
+  branches:
+    include:
+      - main  # or the branches you want to trigger the pipeline
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  # Step 1: Install Python
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.x'
+      addToPath: true
+
+  # Step 2: Install dependencies
+  - script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+      playwright install  # Install Playwright browsers
+    displayName: 'Install dependencies'
+
+  # Step 3: Run Playwright tests
+  - script: |
+      pytest --alluredir=allure-results  # Run tests and generate allure results
+    displayName: 'Run Playwright Tests'
+
+  # Optional Step 4: Publish Allure Report
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: '**/allure-results/*.xml'
+      testRunTitle: 'Playwright Test Results'
