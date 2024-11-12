@@ -20,6 +20,7 @@ from openapi_client.api.store_api import StoreApi
 
 from utils.logger import logger
 
+
 class TestStoreApi(unittest.TestCase):
     """StoreApi unit test stubs"""
 
@@ -56,18 +57,18 @@ class TestStoreApi(unittest.TestCase):
         Place an order for a pet
         """
         payload = {
-                   "petId": 0,
-                   "quantity": 0,
-                   "shipDate": "2024-11-04T10:54:36.704Z",
-                   "status": "placed",
-                   "complete": True
-                   }
+            "petId": 0,
+            "quantity": 0,
+            "shipDate": "2024-11-04T10:54:36.704Z",
+            "status": "placed",
+            "complete": True
+        }
         allure.attach(str(payload), "Request Body")
         response = self.api.place_order(payload, None, None, "applications/json", None)
         print("Response:", response)
 
         # Assertions to validate the response
-        self.assertTrue(response, msg = "Response should not be None")
+        self.assertTrue(response, msg="Response should not be None")
         self.assertEqual(response.status, "placed", "Status should be placed")  # Check status code
 
         json_response = response.model_dump_json()
