@@ -5,7 +5,7 @@
  >> openapi-generator-cli generate -i path/to/swagger.yaml -g python -o ./generated-python-client
  
 ## Install the generated python client, move to generated-python-client folder
->> pip install -e .
+>> pip install i
 
 ## Example usage of generated python client :unit test
 import unittest
@@ -46,28 +46,28 @@ if __name__ == "__main__":
 
 
 ## Explanation of Assertions Used
-assertIsNotNone(response, "Response should not be None")
+>>assertIsNotNone(response, "Response should not be None")
 Ensures the API response isn’t None.
 
-assertEqual(response.status_code, 200, "Status code should be 200")
+>>assertEqual(response.status_code, 200, "Status code should be 200")
 Verifies that the HTTP status code is 200 (OK), which is typically expected for successful requests.
 
-assertTrue(hasattr(response, 'key'), "Response should have 'key' attribute")
+>>assertTrue(hasattr(response, 'key'), "Response should have 'key' attribute")
 Checks that the response object contains a specific attribute (key in this case).
 
-assertEqual(response.key, "expected_value", "Key should match the expected value")
+>>assertEqual(response.key, "expected_value", "Key should match the expected value")
 Verifies that a specific attribute (key) in the response matches the expected value.
 
-assertTrue(response.success, "Response success flag should be True")
+>>assertTrue(response.success, "Response success flag should be True")
 Ensures a success flag or similar indicator is set to True in the response.
 
-assertIsInstance(response.data, list, "Response data should be a list")
+>>assertIsInstance(response.data, list, "Response data should be a list")
 Confirms that response.data is a list, if the response is expected to include one.
 
-assertGreater(len(response.data), 0, "Data list should not be empty")
+>>assertGreater(len(response.data), 0, "Data list should not be empty")
 Ensures that the list in response.data has at least one item.
 
-assertEqual(first_item['name'], "expected_name", "First item's name should match expected value")
+assertEqual(first_item['name'], "expected_name", "First item's name should match expected value")`
 
 ## can be converted to pytest as below
 >> import pytest

@@ -12,7 +12,6 @@ project_root = find_project_root(current_file_path, 'requirements.txt')
 print("Project Root:", project_root)
 nlp_custom = spacy.load(f"{project_root}/rift/rift_model")
 
-
 # Function to process the command and extract information
 # reflections intelligent functional tester AI
 def rift_ai(rift_command: str, page: Page):
